@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Penilaian Keamanan Aset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Penilaian Keamanan Aset dengan STRIDE & DREAD</h1>
+    <div id="form-container">
+        <label for="asset">Jenis Aset:</label>
+        <select id="asset" onchange="updateCases()">
+            <option value="server">Server</option>
+            <option value="database">Database</option>
+            <option value="user_data">Data Pengguna</option>
+            <option value="external_api">API Eksternal</option>
+        </select>
+
+        <label for="threat">Jenis Ancaman (STRIDE):</label>
+        <select id="threat">
+            <option value="spoofing">Spoofing</option>
+            <option value="tampering">Tampering</option>
+            <option value="repudiation">Repudiation</option>
+            <option value="information_disclosure">Information Disclosure</option>
+            <option value="dos">Denial of Service (DoS)</option>
+            <option value="elevation_privilege">Elevation of Privilege</option>
+        </select>
+
+        <h3>Nilai DREAD (1-10)</h3>
+        <div class="dread-section">
+            <label for="damage">Damage Potential:</label>
+            <input type="number" id="damage" min="1" max="10" placeholder="1-10" oninput="showDescription('damage', this.value)">
+            <p id="damage-description" class="description"></p>
+        </div>
+
+        <div class="dread-section">
+            <label for="reproducibility">Reproducibility:</label>
+            <input type="number" id="reproducibility" min="1" max="10" placeholder="1-10" oninput="showDescription('reproducibility', this.value)">
+            <p id="reproducibility-description" class="description"></p>
+        </div>
+
+        <div class="dread-section">
+            <label for="exploitability">Exploitability:</label>
+            <input type="number" id="exploitability" min="1" max="10" placeholder="1-10" oninput="showDescription('exploitability', this.value)">
+            <p id="exploitability-description" class="description"></p>
+        </div>
+
+        <div class="dread-section">
+            <label for="affected_users">Affected Users:</label>
+            <input type="number" id="affected_users" min="1" max="10" placeholder="1-10" oninput="showDescription('affected_users', this.value)">
+            <p id="affected_users-description" class="description"></p>
+        </div>
+
+        <div class="dread-section">
+            <label for="discoverability">Discoverability:</label>
+            <input type="number" id="discoverability" min="1" max="10" placeholder="1-10" oninput="showDescription('discoverability', this.value)">
+            <p id="discoverability-description" class="description"></p>
+        </div>
+
+        <button onclick="calculateRisk()">Hitung Risiko</button>
+        <button onclick="resetForm()">Reset Form</button>
+    </div>
+
+    <div id="result">
+        <h3>Hasil Penilaian Risiko</h3>
+        <p id="riskScore"></p>
+        <p id="mitigation"></p>
+    </div>
+
+    <!-- INFO : Local storage untuk input log -->
+
+    <script src="script.js"></script>
+</body>
+</html>
